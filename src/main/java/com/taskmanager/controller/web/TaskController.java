@@ -11,13 +11,17 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/tasks")
 @RequiredArgsConstructor
 public class TaskController {
 
     private final TaskService taskService;
 
-    @GetMapping
+    @GetMapping("/")
+    public String index() {
+        return "redirect:/tasks";
+    }
+
+    @GetMapping("/tasks")
     public String listTasks(@RequestParam(required = false) TaskStatus status, Model model) {
         if (status != null) {
             model.addAttribute("tasks", taskService.getTasksByStatus(status));
@@ -29,14 +33,14 @@ public class TaskController {
         return "tasks/list";
     }
 
-    @GetMapping("/new")
+    @GetMapping("/tasks/new")
     public String showCreateForm(Model model) {
         model.addAttribute("taskRequest", new TaskRequest());
         model.addAttribute("statuses", TaskStatus.values());
         return "tasks/form";
     }
 
-    @PostMapping("/new")
+    @PostMapping("/tasks/new")
     public String createTask(@Valid @ModelAttribute("taskRequest") TaskRequest request, 
                              BindingResult result, Model model) {
         if (result.hasErrors()) {
@@ -47,7 +51,7 @@ public class TaskController {
         return "redirect:/tasks";
     }
 
-    @GetMapping("/edit/{id}")
+    @GetMapping("/tasks/edit/{id}")
     public String showEditForm(@PathVariable Long id, Model model) {
         var task = taskService.getTaskById(id);
         TaskRequest request = TaskRequest.builder()
@@ -62,7 +66,7 @@ public class TaskController {
         return "tasks/form";
     }
 
-    @PostMapping("/edit/{id}")
+    @PostMapping("/tasks/edit/{id}")
     public String updateTask(@PathVariable Long id, 
                              @Valid @ModelAttribute("taskRequest") TaskRequest request, 
                              BindingResult result, Model model) {
@@ -75,13 +79,13 @@ public class TaskController {
         return "redirect:/tasks";
     }
 
-    @PostMapping("/delete/{id}")
+    @PostMapping("/tasks/delete/{id}")
     public String deleteTask(@PathVariable Long id) {
         taskService.deleteTask(id);
         return "redirect:/tasks";
     }
 
-    @PostMapping("/status/{id}")
+    @PostMapping("/tasks/status/{id}")
     public String updateStatus(@PathVariable Long id, @RequestParam TaskStatus status) {
         taskService.updateTaskStatus(id, status);
         return "redirect:/tasks";
