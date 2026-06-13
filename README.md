@@ -43,7 +43,7 @@ The project follows Clean Architecture and SOLID principles, organized into laye
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/your-username/TaskManager.git
+   git clone https://github.com/ecarrasco-hn/TaskManager.git
    cd TaskManager
    ```
 
