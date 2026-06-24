@@ -86,6 +86,28 @@ The project follows Clean Architecture and SOLID principles, organized into laye
 | PATCH | `/api/tasks/{id}/status`| Update task status |
 | GET | `/api/tasks/stats` | Get task statistics |
 
+## 🧪 Testing Strategy
+
+El proyecto utiliza un enfoque de pruebas piramidal, priorizando las pruebas unitarias y de integración para asegurar la robustez del sistema.
+
+### Entorno de Pruebas
+- **Framework Principal**: JUnit 5 (Jupiter)
+- **Biblioteca de Mocks**: Mockito para el aislamiento de componentes.
+- **Spring Boot Test**: Utilizado para pruebas de integración con el contexto de Spring.
+- **Base de Datos de Prueba**: Se recomienda el uso de una base de datos en memoria (H2) o contenedores (Testcontainers) para pruebas de integración de repositorios.
+
+### Estructura de Pruebas
+Las pruebas se organizan siguiendo la misma estructura de paquetes que el código fuente en `src/test/java`:
+- `com.taskmanager.controller`: Pruebas para controladores API y Web (utilizando MockMvc).
+- `com.taskmanager.service`: Pruebas unitarias para la lógica de negocio.
+- `com.taskmanager.repository`: Pruebas de integración para la capa de persistencia.
+
+### Ejecución de Pruebas
+Para ejecutar todas las pruebas del proyecto, utilice el siguiente comando:
+```bash
+mvn test
+```
+
 ## 📄 License
 
 This project is licensed under the MIT License.
