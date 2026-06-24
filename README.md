@@ -102,6 +102,18 @@ Las pruebas se organizan siguiendo la misma estructura de paquetes que el códig
 - `com.taskmanager.service`: Pruebas unitarias para la lógica de negocio.
 - `com.taskmanager.repository`: Pruebas de integración para la capa de persistencia.
 
+### Pruebas Unitarias Implementadas
+Se han implementado pruebas unitarias para la capa de servicios, específicamente para `TaskServiceImpl`, cubriendo los siguientes escenarios:
+- **Consulta de tareas**: Recuperación de todas las tareas.
+- **Búsqueda por ID**: Casos de éxito y manejo de excepciones cuando la tarea no existe.
+- **Creación de tareas**: Verificación del guardado correcto de nuevas tareas.
+- **Actualización de tareas**: Modificación de datos existentes y gestión de errores.
+- **Eliminación de tareas**: Borrado de tareas existentes y validación de existencia previa.
+- **Gestión de estados**: Cambio de estado de las tareas (PENDING, IN_PROGRESS, COMPLETED).
+- **Estadísticas**: Verificación del conteo correcto de tareas por estado.
+
+Las pruebas utilizan **JUnit 5** y **Mockito** para asegurar el aislamiento de la lógica de negocio, simulando el comportamiento del repositorio.
+
 ### Ejecución de Pruebas
 Para ejecutar todas las pruebas del proyecto, utilice el siguiente comando:
 ```bash
