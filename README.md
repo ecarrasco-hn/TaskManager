@@ -119,25 +119,46 @@ Se han implementado pruebas de integración utilizando **Spring Boot Test** y **
 - **Manejo de Errores**: Verificación de códigos de estado HTTP (200, 201, 204, 400, 404) y respuestas de `GlobalExceptionHandler`.
 - **Base de Datos de Prueba**: Uso de **H2** en memoria configurada específicamente para el perfil de `test`.
 
+### Pruebas Funcionales (UI)
+Se han implementado pruebas funcionales automatizadas para la interfaz web utilizando **Selenium WebDriver** y **WebDriverManager** en `TaskWebFunctionalTest`.
+
+#### Escenarios Cubiertos:
+- **Página Principal**: Verificación del dashboard y visualización de la lista de tareas.
+- **Creación de Tareas**: Flujo completo de registro de nuevas tareas desde el formulario web.
+- **Edición de Tareas**: Modificación de datos de tareas existentes.
+- **Cambio de Estado**: Actualización del estado de la tarea (PENDING, IN_PROGRESS, COMPLETED) mediante la interfaz.
+- **Eliminación de Tareas**: Borrado de tareas con confirmación.
+
+#### Requisitos para Pruebas Funcionales:
+- **Google Chrome**: Las pruebas se ejecutan en modo *headless* utilizando el controlador de Chrome.
+- **WebDriverManager**: Administra automáticamente la descarga y configuración del driver compatible.
+
 ### Reporte de Cobertura (JaCoCo)
-El proyecto cuenta con **JaCoCo** configurado para la generación automática de reportes de cobertura de código.
+El proyecto cuenta con **JaCoCo** configurado para la generación automática de reportes de cobertura de código, integrando resultados de todas las capas de pruebas.
 
 #### Generación del Reporte
-Para ejecutar las pruebas y generar el reporte de JaCoCo, ejecute:
+Para ejecutar todas las pruebas (unitarias, integración y funcionales) y generar el reporte consolidado de JaCoCo, ejecute:
 ```bash
 mvn test
 ```
 El reporte se generará en formato HTML y podrá consultarse en la siguiente ruta tras la ejecución:
 `target/site/jacoco/index.html`
 
+### Estructura del Proyecto de Pruebas
+Las pruebas se organizan siguiendo la misma estructura de paquetes que el código fuente en `src/test/java`:
+- `com.taskmanager.service`: Pruebas unitarias para la lógica de negocio.
+- `com.taskmanager.controller.api`: Pruebas de integración para la API REST.
+- `com.taskmanager.controller.web`: Pruebas funcionales para la interfaz de usuario.
+- `src/test/resources`: Configuraciones específicas para el entorno de pruebas (`application-test.yml`).
+
 ### Ejecución de Pruebas
-Para ejecutar todas las pruebas del proyecto (unitarias e integración), utilice el siguiente comando:
+Para ejecutar todas las pruebas del proyecto (unitarias, integración y funcionales), utilice el siguiente comando:
 ```bash
 mvn test
 ```
-Para ejecutar una clase de prueba específica:
+Para ejecutar una clase de prueba específica (por ejemplo, las funcionales):
 ```bash
-mvn test -Dtest=NombreDeLaClaseTest
+mvn test -Dtest=TaskWebFunctionalTest
 ```
 
 ## 📄 License
