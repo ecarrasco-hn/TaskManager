@@ -112,12 +112,32 @@ Se han implementado pruebas unitarias para la capa de servicios, específicament
 - **Gestión de estados**: Cambio de estado de las tareas (PENDING, IN_PROGRESS, COMPLETED).
 - **Estadísticas**: Verificación del conteo correcto de tareas por estado.
 
-Las pruebas utilizan **JUnit 5** y **Mockito** para asegurar el aislamiento de la lógica de negocio, simulando el comportamiento del repositorio.
+### Pruebas de Integración
+Se han implementado pruebas de integración utilizando **Spring Boot Test** y **MockMvc** en `TaskRestControllerIntegrationTest` para validar el flujo completo de la API:
+- **Endpoints REST**: Validación de todos los métodos (GET, POST, PUT, DELETE, PATCH).
+- **Validación de Datos**: Pruebas de restricciones `@Valid` en los DTOs de entrada.
+- **Manejo de Errores**: Verificación de códigos de estado HTTP (200, 201, 204, 400, 404) y respuestas de `GlobalExceptionHandler`.
+- **Base de Datos de Prueba**: Uso de **H2** en memoria configurada específicamente para el perfil de `test`.
 
-### Ejecución de Pruebas
-Para ejecutar todas las pruebas del proyecto, utilice el siguiente comando:
+### Reporte de Cobertura (JaCoCo)
+El proyecto cuenta con **JaCoCo** configurado para la generación automática de reportes de cobertura de código.
+
+#### Generación del Reporte
+Para ejecutar las pruebas y generar el reporte de JaCoCo, ejecute:
 ```bash
 mvn test
+```
+El reporte se generará en formato HTML y podrá consultarse en la siguiente ruta tras la ejecución:
+`target/site/jacoco/index.html`
+
+### Ejecución de Pruebas
+Para ejecutar todas las pruebas del proyecto (unitarias e integración), utilice el siguiente comando:
+```bash
+mvn test
+```
+Para ejecutar una clase de prueba específica:
+```bash
+mvn test -Dtest=NombreDeLaClaseTest
 ```
 
 ## 📄 License
